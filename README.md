@@ -88,4 +88,4 @@ Makefile              Container lifecycle commands
 
 ## Documentation
 
-See [real_time_vocabulary_quiz_sdd.md](real_time_vocabulary_quiz_sdd.md) for the system design and real-time data-flow details.
+See [SDD.md](SDD.md) for the system design and real-time data-flow details.
