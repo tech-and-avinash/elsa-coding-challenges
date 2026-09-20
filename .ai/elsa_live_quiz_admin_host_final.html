@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELSA Live Quiz</title>
+<style>
+:root{
+  --bg:#f6f7f9;--panel:#fff;--line:#e3e6eb;--text:#1d2430;--muted:#697386;
+  --brand:#5b4ce1;--brand-dark:#493bc4;--green:#18864b;--amber:#a86500;--red:#c43d3d;
+  --sidebar:#171a22;--sidebar-muted:#a7adba;--shadow:0 1px 2px rgba(20,28,40,.05),0 8px 24px rgba(20,28,40,.04);
+}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:var(--bg)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:236px 1fr}
+.sidebar{background:var(--sidebar);color:#fff;display:flex;flex-direction:column;min-height:100vh;position:sticky;top:0;height:100vh}
+.brand{height:64px;display:flex;align-items:center;padding:0 20px;font-weight:800;font-size:19px;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand span{color:#8d83ff;margin-left:3px}.workspace{padding:16px 14px 10px;color:var(--sidebar-muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.nav{padding:0 10px}.nav button{width:100%;border:0;background:transparent;color:var(--sidebar-muted);text-align:left;padding:10px 12px;border-radius:7px;margin:2px 0}.nav button:hover,.nav button.active{background:#282c38;color:#fff}.nav .ico{display:inline-block;width:22px;color:#9da4b2}
+.side-bottom{margin-top:auto;padding:12px 14px;border-top:1px solid rgba(255,255,255,.08);color:var(--sidebar-muted);font-size:12px}
+.main{min-width:0}.topbar{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10}
+.top-title{font-weight:700}.top-actions{display:flex;gap:9px;align-items:center}.avatar{width:32px;height:32px;border-radius:50%;background:#ecebff;color:#4c40c7;display:grid;place-items:center;font-weight:700}
+.content{padding:22px 28px 34px;max-width:1380px;margin:auto}.crumbs{display:flex;gap:7px;align-items:center;color:var(--muted);font-size:12px;margin-bottom:17px}.crumbs button{border:0;background:none;padding:0;color:var(--muted)}.crumbs button:hover{color:var(--brand)}.crumbs .current{color:var(--text);font-weight:600}
+h1{font-size:24px;margin:0 0 5px;letter-spacing:-.02em}h2{font-size:17px;margin:0 0 13px}h3{font-size:14px;margin:0 0 8px}.sub{color:var(--muted);margin-bottom:20px}
+.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.actions{display:flex;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:7px;padding:8px 12px;font-weight:600}.btn:hover{border-color:#c8ccd4;background:#fafafa}.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}.btn.primary:hover{background:var(--brand-dark)}.btn.danger{color:var(--red)}.btn.small{padding:6px 9px;font-size:12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow)}.panel-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.panel-body{padding:17px}
+.grid{display:grid;gap:14px}.grid.two{grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr)}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stat{padding:16px}.stat .label{color:var(--muted);font-size:12px}.stat .value{font-size:24px;font-weight:750;margin-top:4px}.stat .meta{font-size:12px;color:var(--muted);margin-top:4px}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left}.table th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}.table tr:last-child td{border-bottom:0}
+.badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:700;background:#f0f1f4;color:#596273}.badge.live{background:#e8f7ef;color:var(--green)}.badge.ready{background:#eeeaff;color:#5144c9}.badge.done{background:#edf0f3;color:#626b78}
+.field{margin-bottom:14px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid #d9dde5;border-radius:7px;padding:9px 10px;background:#fff;color:var(--text)}.field textarea{min-height:80px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{outline:2px solid rgba(91,76,225,.15);border-color:#8d84e8}
+.q-item{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;background:#fff}.q-head{padding:12px 13px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line)}.q-num{width:25px;height:25px;border-radius:6px;background:#f0efff;color:#5144c9;display:grid;place-items:center;font-weight:700}.q-text{flex:1;font-weight:650}.q-controls{display:flex;gap:5px}.q-body{padding:13px}.option{display:grid;grid-template-columns:24px 1fr 28px;gap:7px;align-items:center;margin:7px 0}.option input[type=text]{padding:8px}.option .correct{accent-color:var(--brand)}.iconbtn{border:0;background:transparent;color:var(--muted);font-size:16px;padding:4px}.iconbtn:hover{color:var(--text)}
+.session-code{font-size:32px;font-weight:800;letter-spacing:.12em}.join-link{color:var(--brand);font-weight:650}.notice{padding:11px 13px;border:1px solid #ddd8ff;background:#f7f6ff;border-radius:7px;color:#4b43a2}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{border:1px solid var(--line);border-radius:8px;padding:13px;background:#fff}.kpi .n{font-size:21px;font-weight:750}.kpi .l{font-size:11px;color:var(--muted);margin-top:2px}
+.question-stage{border:1px solid var(--line);background:#fff;border-radius:9px;padding:22px}.question-stage .qmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:12px}.question-stage .bigq{font-size:22px;font-weight:750;line-height:1.25;margin-bottom:16px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:8px}.answer{border:1px solid var(--line);border-radius:8px;padding:12px;text-align:left;background:#fff}.answer:hover{border-color:#bcb7f2;background:#faf9ff}.answer.selected{border-color:var(--brand);background:#f4f2ff}.answer.correct{border-color:#a6d8bd;background:#eef9f2}.answer.wrong{border-color:#e6b0b0;background:#fff2f2}
+.rank-me{background:#f5f3ff}.rank{width:36px;font-weight:750}.me-tag{font-size:10px;background:#e9e5ff;color:#5144c9;border-radius:999px;padding:2px 6px;margin-left:5px}
+.player-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.player-summary .panel{padding:14px}.big-number{font-size:26px;font-weight:800}.muted{color:var(--muted)}
+.center{max-width:720px;margin:45px auto}.join-box{max-width:480px;margin:0 auto}.empty{text-align:center;padding:35px;color:var(--muted)}
+.footer{color:#8a92a0;font-size:11px;text-align:center;padding:18px 0 4px}
+.hidden{display:none!important}
+@media(max-width:1000px){.app{grid-template-columns:190px 1fr}.grid.two{grid-template-columns:1fr}.grid.three{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.app{grid-template-columns:1fr}.sidebar{position:static;height:auto;min-height:auto}.nav{display:flex;overflow:auto}.nav button{min-width:max-content}.workspace,.side-bottom{display:none}.content{padding:16px}.topbar{padding:0 16px}.answers{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+
+.live-host-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr);gap:14px}
+.host-question-title{font-size:21px;font-weight:760;line-height:1.25;margin-bottom:15px}
+.host-option{border:1px solid var(--line);padding:10px 11px;border-radius:7px;margin:7px 0;display:flex;justify-content:space-between;gap:10px}
+.host-option.correct{border-color:#abd8bc;background:#eef9f2}
+.host-option .tag{font-size:10px;color:var(--green);font-weight:750}
+.response-dist{display:grid;gap:10px}
+.response-row{display:grid;grid-template-columns:34px 1fr 43px;gap:9px;align-items:center}
+.response-label{font-weight:750}.response-bar{height:24px;background:#eef0f3;border-radius:5px;overflow:hidden}
+.response-bar span{display:block;height:100%;background:#bbb7ec;border-radius:5px;transition:.25s}
+.response-bar.correct span{background:#8bcaa8}.response-count{text-align:right;font-weight:700}
+.response-state{display:flex;align-items:center;gap:9px;padding:11px 12px;background:#f7f8fa;border:1px solid var(--line);border-radius:7px;margin-top:15px}
+.response-dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+@media(max-width:1050px){.live-host-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">ELSA<span>•</span></div>
+  <div class="workspace">Workspace</div>
+  <nav class="nav">
+    <button data-nav="dashboard"><span class="ico">⌂</span>Dashboard</button>
+    <button data-nav="quizzes"><span class="ico">▤</span>Quizzes</button>
+    <button data-nav="sessions"><span class="ico">◉</span>Live sessions</button>
+    <button data-nav="reports"><span class="ico">▥</span>Reports</button>
+    <button data-nav="settings"><span class="ico">⚙</span>Settings</button>
+  </nav>
+  <div class="side-bottom">Live Quiz workspace<br>v1.0</div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div class="top-title" id="topTitle">Dashboard</div>
+  <div class="top-actions"><button class="btn small" onclick="newQuiz()">+ New quiz</button><div class="avatar">EL</div></div>
+</header>
+<div class="content">
+  <div class="crumbs" id="crumbs"></div>
+
+  <section id="dashboard" class="view">
+    <div class="toolbar"><div><h1>Dashboard</h1><div class="sub">Create quizzes, open live sessions, and review results.</div></div><div class="actions"><button class="btn primary" onclick="newQuiz()">Create quiz</button></div></div>
+    <div class="grid three">
+      <div class="panel stat"><div class="label">Quizzes</div><div class="value">12</div><div class="meta">3 updated this week</div></div>
+      <div class="panel stat"><div class="label">Live sessions</div><div class="value">2</div><div class="meta">1 currently running</div></div>
+      <div class="panel stat"><div class="label">Participants</div><div class="value">184</div><div class="meta">Across recent sessions</div></div>
+    </div>
+    <div style="height:14px"></div>
+    <div class="panel"><div class="panel-head"><h2>Recent sessions</h2><button class="btn small" onclick="go('sessions')">View all</button></div>
+      <table class="table"><thead><tr><th>Quiz</th><th>Status</th><th>Participants</th><th>Updated</th><th></th></tr></thead><tbody>
+      <tr><td>Business English Basics</td><td><span class="badge live">Live</span></td><td>18</td><td>Just now</td><td><button class="btn small" onclick="openHostLive()">Open</button></td></tr>
+      <tr><td>Travel Vocabulary</td><td><span class="badge done">Completed</span></td><td>32</td><td>Yesterday</td><td><button class="btn small" onclick="showResults()">Results</button></td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <section id="quizzes" class="view hidden">
+    <div class="toolbar"><div><h1>Quizzes</h1><div class="sub">Manage question sets and launch them into a live session.</div></div><div class="actions"><button class="btn primary" onclick="newQuiz()">+ New quiz</button></div></div>
+    <div class="panel"><table class="table"><thead><tr><th>Quiz</th><th>Questions</th><th>Last updated</th><th>Status</th><th></th></tr></thead><tbody>
+      <tr><td><strong>Business English Basics</strong><div class="muted">Vocabulary · General</div></td><td id="quizCount">5</td><td>Today</td><td><span class="badge ready">Ready</span></td><td><div class="actions"><button class="btn small" onclick="editQuiz()">Edit</button><button class="btn small primary" onclick="openLobby()">Host live</button></div></td></tr>
+      <tr><td><strong>Travel Vocabulary</strong><div class="muted">Vocabulary · B1</div></td><td>8</td><td>Yesterday</td><td><span class="badge ready">Ready</span></td><td><button class="btn small" onclick="editQuiz()">Edit</button></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section id="quizEditor" class="view hidden">
+    <div class="toolbar"><div><h1 id="editorTitle">Business English Basics</h1><div class="sub">Edit the question set before opening a live session.</div></div><div class="actions"><button class="btn" onclick="go('quizzes')">Cancel</button><button class="btn primary" onclick="saveQuiz()">Save quiz</button></div></div>
+    <div class="grid two">
+      <div class="panel"><div class="panel-head"><h2>Questions</h2><button class="btn small" onclick="addQuestion()">+ Add question</button></div><div class="panel-body" id="questionEditor"></div></div>
+      <div class="panel"><div class="panel-head"><h2>Quiz settings</h2></div><div class="panel-body">
+        <div class="field"><label>Title</label><input id="quizTitle" value="Business English Basics"></div>
+        <div class="field"><label>Description</label><textarea id="quizDesc">Everyday vocabulary for meetings, email, and workplace communication.</textarea></div>
+        <div class="field"><label>Time per question</label><select><option>20 seconds</option><option>30 seconds</option><option>45 seconds</option></select></div>
+        <div class="field"><label>Scoring</label><select><option>Correctness + response speed</option><option>Correctness only</option></select></div>
+        <div class="notice">The host sees the full live leaderboard. Participants see their own score and current position.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="sessions" class="view hidden">
+    <div class="toolbar"><div><h1>Live sessions</h1><div class="sub">Open a session, share the join details, and monitor the room.</div></div></div>
+    <div class="panel"><table class="table"><thead><tr><th>Quiz</th><th>Session</th><th>Status</th><th>Players</th><th></th></tr></thead><tbody>
+      <tr><td><strong>Business English Basics</strong></td><td>ELSA-4821</td><td><span class="badge live">Live</span></td><td>18</td><td><button class="btn small primary" onclick="openHostLive()">Monitor</button></td></tr>
+      <tr><td>Travel Vocabulary</td><td>ELSA-3910</td><td><span class="badge done">Completed</span></td><td>32</td><td><button class="btn small" onclick="showResults()">View results</button></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section id="hostLobby" class="view hidden">
+    <div class="toolbar"><div><h1>Live session</h1><div class="sub">Business English Basics · Waiting room</div></div><div class="actions"><button class="btn" onclick="go('quizzes')">Back to quizzes</button><button class="btn primary" onclick="startLive()">Start session</button></div></div>
+    <div class="grid two">
+      <div class="panel"><div class="panel-head"><h2>Join details</h2><span class="badge ready">Ready</span></div><div class="panel-body">
+        <div class="muted">Session code</div><div class="session-code">4821</div><p class="muted">Share this code or the link below with participants.</p>
+        <div class="join-link">elsa.example/join/4821</div><div style="height:12px"></div><button class="btn small" onclick="copyJoin()">Copy join link</button>
+      </div></div>
+      <div class="panel"><div class="panel-head"><h2>Participants <span id="lobbyCount">18</span></h2></div><div class="panel-body" id="lobbyPlayers"></div></div>
+    </div>
+  </section>
+
+  <section id="hostLive" class="view hidden">
+    <div class="toolbar">
+      <div><h1>Business English Basics</h1><div class="sub">Live monitoring · Session 4821</div></div>
+      <div class="actions"><span class="badge live" id="hostSessionStatus">● Live</span><button class="btn" onclick="endLive()">End session</button></div>
+    </div>
+
+    <div class="kpis" id="hostKpis"></div>
+
+    <div class="live-host-grid">
+      <section class="panel">
+        <div class="panel-head"><h2>Current question</h2><span class="muted" id="hostQuestionLabel">Question 1 of 5</span></div>
+        <div class="panel-body">
+          <div class="host-question-title" id="hostQuestionText"></div>
+          <div id="hostQuestionOptions"></div>
+          <div class="notice">Host view · The question is shown here for context while you monitor the room.</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Live leaderboard</h2><span class="badge live">Updates live</span></div>
+        <div style="padding:0"><table class="table"><thead><tr><th>#</th><th>Participant</th><th>Score</th></tr></thead><tbody id="hostBoard"></tbody></table></div>
+      </section>
+    </div>
+
+    <div style="height:14px"></div>
+
+    <section class="panel">
+      <div class="panel-head"><h2>Response overview</h2><span class="muted">Collective answers for the current question</span></div>
+      <div class="panel-body">
+        <div class="response-dist" id="hostDistribution"></div>
+        <div class="response-state"><span class="response-dot"></span><strong id="hostResponseState">0 of 18 participants have answered</strong></div>
+      </div>
+    </section>
+  </section>
+  <section id="playerJoin" class="view hidden">
+    <div class="center join-box"><div class="panel"><div class="panel-body"><h1>Join live quiz</h1><div class="sub">Enter the session code and your display name.</div>
+      <div class="field"><label>Session code</label><input id="joinCode" value="4821"></div><div class="field"><label>Display name</label><input id="playerName" value="Alex"></div><button class="btn primary" style="width:100%" onclick="joinSession()">Join session</button>
+    </div></div></div>
+  </section>
+
+  <section id="playerLobby" class="view hidden">
+    <div class="center"><div class="panel"><div class="panel-body" style="text-align:center"><div class="muted">Joined as</div><h1 id="joinedName">Alex</h1><p class="sub">Waiting for the host to start the session.</p><div class="notice">Keep this screen open. Your question will appear here when the session starts.</div><div style="height:16px"></div><button class="btn" onclick="go('playerJoin')">Change name</button></div></div></div>
+  </section>
+
+  <section id="playerLive" class="view hidden">
+    <div class="toolbar"><div><h1>Business English Basics</h1><div class="sub">Question <span id="pQNo">1</span> of <span id="pTotal">5</span></div></div><div class="badge ready" id="pTimer">20 sec</div></div>
+    <div class="grid two">
+      <div class="question-stage" id="playerQuestion"></div>
+      <div>
+        <div class="player-summary"><div class="panel"><div class="muted">My score</div><div class="big-number" id="myScore">0</div></div><div class="panel"><div class="muted">My position</div><div class="big-number" id="myRank">—</div></div></div>
+        <div class="panel"><div class="panel-head"><h2>My progress</h2></div><div class="panel-body"><div class="muted">Your rank is shown here after each answer. The full standings remain on the host screen.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" class="view hidden">
+    <div class="toolbar"><div><h1>Session results</h1><div class="sub">Business English Basics · Session 4821 · Completed</div></div><div class="actions"><button class="btn" onclick="go('sessions')">Back to sessions</button><button class="btn primary" onclick="go('reports')">Open report</button></div></div>
+    <div class="grid two">
+      <div class="panel"><div class="panel-head"><h2>Final leaderboard</h2><span class="badge done">Completed</span></div><div class="panel-body" style="padding:0"><table class="table"><thead><tr><th>#</th><th>Participant</th><th>Score</th><th>Accuracy</th></tr></thead><tbody id="finalBoard"></tbody></table></div></div>
+      <div class="panel"><div class="panel-head"><h2>Session summary</h2></div><div class="panel-body" id="summary"></div></div>
+    </div>
+  </section>
+
+  <section id="reports" class="view hidden">
+    <div class="toolbar"><div><h1>Reports</h1><div class="sub">Review completed sessions and participant performance.</div></div></div>
+    <div class="panel"><table class="table"><thead><tr><th>Session</th><th>Quiz</th><th>Participants</th><th>Average score</th><th></th></tr></thead><tbody>
+      <tr><td>4821</td><td>Business English Basics</td><td>18</td><td>720</td><td><button class="btn small" onclick="showResults()">View report</button></td></tr>
+      <tr><td>3910</td><td>Travel Vocabulary</td><td>32</td><td>680</td><td><button class="btn small">View report</button></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section id="settings" class="view hidden">
+    <div class="toolbar"><div><h1>Settings</h1><div class="sub">Workspace preferences.</div></div></div>
+    <div class="panel"><div class="panel-body"><div class="field"><label>Workspace name</label><input value="ELSA Live Quiz"></div><div class="field"><label>Default scoring</label><select><option>Correctness + response speed</option><option>Correctness only</option></select></div><button class="btn primary">Save settings</button></div></div>
+  </section>
+
+  <div class="footer">ELSA Live Quiz · Workspace</div>
+</div>
+</main>
+</div>
+<script>
+const initialQuestions=[
+ {q:"What does “concise” mean?",a:["Brief and clear","Difficult to understand","Very detailed","Informal"],c:0},
+ {q:"Which word means “to postpone”?",a:["Confirm","Defer","Resolve","Proceed"],c:1},
+ {q:"Choose the best phrase for a meeting follow-up.",a:["Please find below","Let's circle back","I am agree","Do the needful"],c:1},
+ {q:"What is the opposite of “expand”?",a:["Increase","Extend","Reduce","Explain"],c:2},
+ {q:"Which word means “necessary or essential”?",a:["Optional","Relevant","Mandatory","Casual"],c:2}
+];
+let questions=JSON.parse(JSON.stringify(initialQuestions));
+let current=0, joined=false, playerName="Alex", score=0, answered=false, sessionStarted=false;
+let players=[
+ {name:"Priya",score:980,correct:5},{name:"Daniel",score:920,correct:5},{name:"Maya",score:860,correct:4},
+ {name:"Alex",score:0,correct:0},{name:"Noah",score:780,correct:4},{name:"Sara",score:720,correct:4},
+ {name:"Liam",score:680,correct:3},{name:"Emma",score:640,correct:3},{name:"Ravi",score:600,correct:3}
+];
+const views=["dashboard","quizzes","quizEditor","sessions","hostLobby","hostLive","playerJoin","playerLobby","playerLive","results","reports","settings"];
+const labels={dashboard:"Dashboard",quizzes:"Quizzes",quizEditor:"Quiz editor",sessions:"Live sessions",hostLobby:"Live session",hostLive:"Live session",playerJoin:"Join",playerLobby:"Waiting room",playerLive:"Live quiz",results:"Results",reports:"Reports",settings:"Settings"};
+function go(v){navigate(v)}
+function navigate(v){
+ views.forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==v));
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.nav===({quizEditor:"quizzes",hostLobby:"sessions",hostLive:"sessions",playerJoin:"sessions",playerLobby:"sessions",playerLive:"sessions",results:"sessions"}[v]||v)));
+ document.getElementById("topTitle").textContent=labels[v];
+ renderCrumbs(v);
+ if(v==="quizEditor") renderEditor(); if(v==="hostLobby") renderLobby(); if(v==="hostLive") renderHost(); if(v==="playerLive") renderPlayer(); if(v==="results") renderResults();
+}
+function renderCrumbs(v){
+ let map={dashboard:["Dashboard"],quizzes:["Quizzes"],quizEditor:["Quizzes","Quiz editor"],sessions:["Live sessions"],hostLobby:["Quizzes","Live session"],hostLive:["Live sessions","Live session"],playerJoin:["Live sessions","Join"],playerLobby:["Live sessions","Join","Waiting room"],playerLive:["Live sessions","Live quiz"],results:["Live sessions","Results"],reports:["Reports"],settings:["Settings"]};
+ let arr=map[v]||[labels[v]]; document.getElementById("crumbs").innerHTML=arr.map((x,i)=>i===arr.length-1?`<span class="current">${x}</span>`:`<button onclick="crumbGo('${x}')">${x}</button><span>›</span>`).join("");
+}
+function crumbGo(x){if(x==="Dashboard")go("dashboard");else if(x==="Quizzes")go("quizzes");else if(x==="Live sessions")go("sessions");else if(x==="Reports")go("reports");}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.nav));
+function newQuiz(){questions=[{q:"",a:["","","",""],c:0}];document.getElementById("editorTitle").textContent="New quiz";document.getElementById("quizTitle").value="New vocabulary quiz";go("quizEditor")}
+function editQuiz(){document.getElementById("editorTitle").textContent=document.getElementById("quizTitle").value||"Business English Basics";go("quizEditor")}
+function renderEditor(){
+ let wrap=document.getElementById("questionEditor");wrap.innerHTML="";
+ questions.forEach((q,i)=>{
+  let el=document.createElement("div");el.className="q-item";
+  el.innerHTML=`<div class="q-head"><div class="q-num">${i+1}</div><div class="q-text">${q.q||"Untitled question"}</div><div class="q-controls"><button class="iconbtn" onclick="moveQ(${i},-1)">↑</button><button class="iconbtn" onclick="moveQ(${i},1)">↓</button><button class="iconbtn" onclick="removeQ(${i})">×</button></div></div>
+  <div class="q-body"><div class="field"><label>Question</label><input value="${esc(q.q)}" oninput="questions[${i}].q=this.value;this.closest('.q-item').querySelector('.q-text').textContent=this.value||'Untitled question'"></div>
+  ${q.a.map((a,j)=>`<div class="option"><input class="correct" type="radio" name="correct${i}" ${q.c===j?"checked":""} onchange="questions[${i}].c=${j}"><input value="${esc(a)}" placeholder="Answer option ${j+1}" oninput="questions[${i}].a[${j}]=this.value"><button class="iconbtn" onclick="removeOption(${i},${j})">×</button></div>`).join("")}
+  <button class="btn small" onclick="addOption(${i})">+ Add answer</button></div>`;
+  wrap.appendChild(el);
+ });
+ document.getElementById("quizCount").textContent=questions.length;
+}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}
+function addQuestion(){questions.push({q:"",a:["","","",""],c:0});renderEditor()}
+function removeQ(i){if(questions.length>1){questions.splice(i,1);renderEditor()}}
+function moveQ(i,d){let n=i+d;if(n<0||n>=questions.length)return;[questions[i],questions[n]]=[questions[n],questions[i]];renderEditor()}
+function addOption(i){questions[i].a.push("");renderEditor()}
+function removeOption(i,j){if(questions[i].a.length>2){questions[i].a.splice(j,1);if(questions[i].c===j)questions[i].c=0;else if(questions[i].c>j)questions[i].c--;renderEditor()}}
+function saveQuiz(){document.getElementById("quizTitle").value=document.getElementById("quizTitle").value.trim()||"Business English Basics";document.getElementById("editorTitle").textContent=document.getElementById("quizTitle").value;go("quizzes")}
+function openLobby(){go("hostLobby")}
+function renderLobby(){document.getElementById("lobbyPlayers").innerHTML=players.map(p=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)">${p.name}</div>`).join("");document.getElementById("lobbyCount").textContent=players.length}
+function copyJoin(){navigator.clipboard?.writeText("https://elsa.example/join/4821");}
+function startLive(){sessionStarted=true;current=0;answered=false;go("hostLive")}
+function openHostLive(){sessionStarted=true;go("hostLive")}
+function renderHost(){
+ let q=questions[current]||initialQuestions[current%initialQuestions.length];
+ let distributions=[[10,2,4,2],[3,12,2,1],[2,3,11,2],[2,3,11,2],[1,4,2,11]];
+ let d=distributions[current]||[3,12,2,1];
+ let total=d.reduce((a,b)=>a+b,0), max=Math.max(...d), letters=["A","B","C","D"];
+ let correctIndex=q.c;
+ document.getElementById("hostQuestionLabel").textContent=`Question ${current+1} of ${questions.length}`;
+ document.getElementById("hostQuestionText").textContent=q.q;
+ document.getElementById("hostQuestionOptions").innerHTML=q.a.map((a,i)=>`<div class="host-option ${i===correctIndex?'correct':''}"><span><strong>${letters[i]}</strong> &nbsp;${a}</span>${i===correctIndex?'<span class="tag">Correct</span>':''}</div>`).join("");
+ document.getElementById("hostDistribution").innerHTML=d.map((n,i)=>`<div class="response-row"><div class="response-label">${letters[i]}</div><div class="response-bar ${i===correctIndex?'correct':''}"><span style="width:${n/max*100}%"></span></div><div class="response-count">${n}</div></div>`).join("");
+ document.getElementById("hostResponseState").textContent=`${total} of ${players.length} participants have answered`;
+ let accuracy=Math.round((d[correctIndex]/total)*100);
+ let avg=Math.round(players.reduce((s,p)=>s+p.score,0)/players.length);
+ document.getElementById("hostKpis").innerHTML=[
+   ["Question",`${current+1} / ${questions.length}`,"Live"],
+   ["Responses",`${total} / ${players.length}`,`${Math.round(total/players.length*100)}% complete`],
+   ["Accuracy",`${accuracy}%`,"Current question"],
+   ["Players",players.length,"Connected"],
+   ["Avg. score",avg,"Across players"]
+ ].map(x=>`<div class="kpi"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><div class="detail">${x[2]}</div></div>`).join("");
+ let sorted=[...players].sort((a,b)=>b.score-a.score);
+ document.getElementById("hostBoard").innerHTML=sorted.map((p,i)=>`<tr class="${p.name===playerName?'rank-me':''}"><td class="rank">${i+1}</td><td><strong>${p.name}</strong>${p.name===playerName?'<span class="me-tag">you</span>':''}</td><td>${p.score}</td></tr>`).join("");
+}
+
+function joinSession(){let n=document.getElementById("playerName").value.trim()||"Alex";playerName=n;joined=true;if(!players.find(p=>p.name===n))players.push({name:n,score:0,correct:0});document.getElementById("joinedName").textContent=n;go("playerLobby")}
+function renderPlayer(){
+ let q=questions[current]||initialQuestions[current%initialQuestions.length];document.getElementById("pQNo").textContent=current+1;document.getElementById("pTotal").textContent=questions.length;document.getElementById("pTimer").textContent="20 sec";
+ document.getElementById("myScore").textContent=score;let me=players.find(p=>p.name===playerName);let sorted=[...players].sort((a,b)=>b.score-a.score);document.getElementById("myRank").textContent=sorted.findIndex(p=>p.name===playerName)+1;
+ document.getElementById("playerQuestion").innerHTML=`<div class="qmeta"><span>Choose one answer</span><span>20 seconds</span></div><div class="bigq">${q.q}</div><div class="answers">${q.a.map((a,i)=>`<button class="answer" onclick="answer(${i})"><strong>${String.fromCharCode(65+i)}</strong> &nbsp; ${a}</button>`).join("")}</div>`;
+}
+function answer(i){
+ if(answered)return;answered=true;let q=questions[current]||initialQuestions[current%initialQuestions.length];let me=players.find(p=>p.name===playerName);let correct=i===q.c;let points=correct?1000:0;score+=points;me.score=score;if(correct)me.correct++;
+ renderHost();renderPlayer();
+ setTimeout(()=>{if(current<questions.length-1){current++;answered=false;go("playerLive");}else{finishSession()}},650);
+}
+function finishSession(){
+ sessionStarted=false;
+ const s=document.getElementById("hostSessionStatus");
+ if(s){s.className="badge done";s.textContent="Completed";}
+ go("results");
+}
+function renderResults(){
+ let sorted=[...players].sort((a,b)=>b.score-a.score);document.getElementById("finalBoard").innerHTML=sorted.map((p,i)=>`<tr class="${p.name===playerName?'rank-me':''}"><td class="rank">${i+1}</td><td>${p.name}${p.name===playerName?'<span class="me-tag">you</span>':''}</td><td><strong>${p.score}</strong></td><td>${Math.round(p.correct/questions.length*100)}%</td></tr>`).join("");
+ let me=sorted.find(p=>p.name===playerName)||sorted[0];document.getElementById("summary").innerHTML=`<div class="field"><label>Participants</label><div class="big-number">${players.length}</div></div><div class="field"><label>Questions</label><div class="big-number">${questions.length}</div></div><div class="field"><label>Average score</label><div class="big-number">${Math.round(players.reduce((s,p)=>s+p.score,0)/players.length)}</div></div><div class="notice">Final standings are available after the session. During play, participants see their own score and position while the host sees the full live leaderboard.</div>`;
+}
+function showResults(){go("results")}
+function endLive(){finishSession()}
+navigate("dashboard");
+</script>
+</body>
+</html>

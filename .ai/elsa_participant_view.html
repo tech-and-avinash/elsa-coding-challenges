@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELSA — Live Quiz</title>
+<style>
+:root{
+  --bg:#f4f5f8;--surface:#fff;--line:#e1e4ea;--text:#202632;--muted:#707989;
+  --brand:#5b4ce1;--brand2:#493bc4;--green:#18864b;--red:#c43d3d;--amber:#9a6500;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh;display:flex;flex-direction:column}
+.header{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.logo{font-size:19px;font-weight:800}.logo span{color:var(--brand)}
+.session{font-size:12px;color:var(--muted)}.session strong{color:var(--text)}
+.user{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:650}.avatar{width:30px;height:30px;border-radius:50%;background:#eceaff;color:#5144c9;display:grid;place-items:center}
+main{width:min(980px,calc(100% - 32px));margin:0 auto;padding:24px 0 42px;flex:1}
+.progress{height:5px;background:#e4e6eb;border-radius:99px;overflow:hidden;margin-bottom:24px}.progress span{display:block;height:100%;width:20%;background:var(--brand);transition:.25s}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.card-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.card-body{padding:20px}
+.question-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:15px}
+.question{font-size:25px;font-weight:760;line-height:1.25;margin-bottom:20px;letter-spacing:-.02em}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.answer{border:1px solid #d9dde5;background:#fff;border-radius:9px;padding:15px;text-align:left;display:flex;gap:11px;align-items:flex-start;min-height:64px;transition:.12s}
+.answer:hover{border-color:#a9a3eb;background:#faf9ff}.answer .letter{width:27px;height:27px;border-radius:6px;background:#f0efff;color:#5144c9;display:grid;place-items:center;font-weight:750;flex:0 0 auto}
+.answer.selected{border-color:var(--brand);background:#f4f2ff}.answer.correct{border-color:#a6d8bd;background:#eef9f2}.answer.wrong{border-color:#e4b1b1;background:#fff2f2}
+.timer{font-size:12px;font-weight:750;color:var(--amber);background:#fff7e8;border:1px solid #f0ddb3;border-radius:999px;padding:5px 9px}
+.side-block{padding:16px;border-bottom:1px solid var(--line)}.side-block:last-child{border-bottom:0}
+.side-title{font-size:12px;font-weight:750;margin-bottom:10px}.score{font-size:27px;font-weight:800}.rank{font-size:21px;font-weight:800}.muted{color:var(--muted);font-size:12px}
+.notice{background:#f7f6ff;border:1px solid #ddd8ff;color:#4e46a3;border-radius:7px;padding:10px 11px;font-size:12px}
+.feedback{margin-top:16px;border-radius:8px;padding:12px;font-weight:650}.feedback.correct{background:#eef9f2;color:var(--green)}.feedback.wrong{background:#fff2f2;color:var(--red)}
+.footer{font-size:11px;color:#8a92a0;text-align:center;padding:14px}
+.center{min-height:calc(100vh - 110px);display:grid;place-items:center}.join{width:min(430px,100%)}.join h1{margin:0 0 5px;font-size:25px}.join p{color:var(--muted);margin:0 0 20px}.field{margin-bottom:14px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input{width:100%;border:1px solid #d9dde5;border-radius:7px;padding:10px}.btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:9px 13px;font-weight:700}.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}.btn.primary:hover{background:var(--brand2)}.btn.full{width:100%}
+.wait{text-align:center;width:min(540px,100%)}.wait h1{font-size:28px;margin:8px 0}.code{font-size:38px;font-weight:850;letter-spacing:.12em;margin:8px 0 15px}.pulse{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-weight:700;font-size:12px}.dot{width:7px;height:7px;background:var(--green);border-radius:50%}
+.final{width:min(760px,100%)}.final h1{font-size:28px;margin:0 0 4px}.final-sub{color:var(--muted);margin-bottom:18px}.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.summary .card-body{padding:15px}.num{font-size:26px;font-weight:800}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px 13px;border-bottom:1px solid var(--line);text-align:left}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.table tr:last-child td{border-bottom:0}.me{background:#f5f3ff}.me-tag{font-size:10px;background:#e9e5ff;color:#5144c9;border-radius:999px;padding:2px 6px;margin-left:5px}
+.hidden{display:none!important}
+@media(max-width:760px){main{width:min(100% - 20px,680px);padding-top:16px}.layout{grid-template-columns:1fr}.answers{grid-template-columns:1fr}.header{padding:0 14px}.session{display:none}.side-card{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="logo">ELSA<span>•</span></div>
+  <div class="session">Live session <strong>4821</strong></div>
+  <div class="user"><span id="headerName">Alex</span><span class="avatar">A</span></div>
+</header>
+
+<main>
+  <!-- Join -->
+  <section id="joinView" class="center">
+    <div class="join card">
+      <div class="card-body">
+        <h1>Join live quiz</h1>
+        <p>Enter the session code and the name you want other participants to see.</p>
+        <div class="field"><label>Session code</label><input id="code" value="4821"></div>
+        <div class="field"><label>Your name</label><input id="name" value="Alex"></div>
+        <button class="btn primary full" onclick="join()">Join session</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waiting room -->
+  <section id="waitView" class="center hidden">
+    <div class="wait">
+      <div class="pulse"><span class="dot"></span> Connected</div>
+      <h1>You're in</h1>
+      <p class="muted">Business English Basics</p>
+      <div class="code">4821</div>
+      <div class="card">
+        <div class="card-body">
+          <strong id="waitName">Alex</strong>
+          <p class="muted">Waiting for the host to start the quiz.</p>
+          <div class="notice">Keep this page open. The first question will appear automatically when the session starts.</div>
+        </div>
+      </div>
+      <div style="height:14px"></div>
+      <button class="btn" onclick="show('joinView')">Change details</button>
+    </div>
+  </section>
+
+  <!-- Live -->
+  <section id="liveView" class="hidden">
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="layout">
+      <div class="card">
+        <div class="card-body">
+          <div class="question-meta"><span>Question <strong id="qNo">1</strong> of <strong id="qTotal">5</strong></span><span class="timer" id="timer">20 sec</span></div>
+          <div class="question" id="question"></div>
+          <div class="answers" id="answers"></div>
+          <div id="feedback"></div>
+        </div>
+      </div>
+      <aside class="card side-card">
+        <div class="side-block"><div class="side-title">My score</div><div class="score" id="score">0</div><div class="muted">points</div></div>
+        <div class="side-block"><div class="side-title">My position</div><div class="rank" id="rank">—</div><div class="muted">in this session</div></div>
+        <div class="side-block"><div class="side-title">Your progress</div><div class="muted" id="progressText">0 of 5 answered</div></div>
+        <div class="side-block"><div class="notice">The host can see the full live leaderboard. Your screen shows your score and current position.</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Final -->
+  <section id="finalView" class="hidden">
+    <div class="final">
+      <h1>Quiz complete</h1>
+      <div class="final-sub">Business English Basics · Session 4821</div>
+      <div class="summary">
+        <div class="card"><div class="card-body"><div class="muted">Your score</div><div class="num" id="finalScore">0</div></div></div>
+        <div class="card"><div class="card-body"><div class="muted">Your position</div><div class="num" id="finalRank">—</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><strong>Final leaderboard</strong><span class="muted">Session completed</span></div>
+        <table class="table"><thead><tr><th>#</th><th>Participant</th><th>Score</th><th>Accuracy</th></tr></thead><tbody id="leaderboard"></tbody></table>
+      </div>
+      <div style="height:14px"></div>
+      <div class="notice">Final standings are available after the session. During the quiz, your screen only exposes your own live score and position.</div>
+    </div>
+  </section>
+</main>
+<footer class="footer">ELSA Live Quiz · Participant</footer>
+</div>
+
+<script>
+const questions=[
+ {q:"What does “concise” mean?",a:["Brief and clear","Difficult to understand","Very detailed","Informal"],c:0},
+ {q:"Which word means “to postpone”?",a:["Confirm","Defer","Resolve","Proceed"],c:1},
+ {q:"Choose the best phrase for a meeting follow-up.",a:["Please find below","Let's circle back","I am agree","Do the needful"],c:1},
+ {q:"What is the opposite of “expand”?",a:["Increase","Extend","Reduce","Explain"],c:2},
+ {q:"Which word means “necessary or essential”?",a:["Optional","Relevant","Mandatory","Casual"],c:2}
+];
+let players=[
+ {name:"Priya",score:980,correct:5},{name:"Daniel",score:920,correct:5},{name:"Maya",score:860,correct:4},
+ {name:"Alex",score:0,correct:0},{name:"Noah",score:780,correct:4},{name:"Sara",score:720,correct:4},
+ {name:"Liam",score:680,correct:3},{name:"Emma",score:640,correct:3},{name:"Ravi",score:600,correct:3}
+];
+let me="Alex",qIndex=0,score=0,answered=false;
+
+function show(id){["joinView","waitView","liveView","finalView"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id))}
+function join(){
+ me=document.getElementById("name").value.trim()||"Alex";
+ document.getElementById("headerName").textContent=me;
+ document.getElementById("waitName").textContent=me;
+ let existing=players.find(p=>p.name===me);if(!existing)players.push({name:me,score:0,correct:0});
+ show("waitView");
+ // The waiting room has a small host-start control for demo navigation only.
+ setTimeout(()=>start(),900);
+}
+function start(){qIndex=0;score=0;answered=false;show("liveView");render()}
+function render(){
+ const q=questions[qIndex], p=document.getElementById("progressBar");
+ document.getElementById("qNo").textContent=qIndex+1;document.getElementById("qTotal").textContent=questions.length;
+ document.getElementById("question").textContent=q.q;document.getElementById("timer").textContent="20 sec";
+ p.style.width=((qIndex)/questions.length*100)+"%";
+ document.getElementById("score").textContent=score;
+ document.getElementById("progressText").textContent=qIndex+" of "+questions.length+" answered";
+ updateRank();
+ document.getElementById("feedback").innerHTML="";
+ const box=document.getElementById("answers");box.innerHTML="";
+ q.a.forEach((a,i)=>{const b=document.createElement("button");b.className="answer";b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span><span>${a}</span>`;b.onclick=()=>answer(i,b);box.appendChild(b)})
+}
+function updateRank(){
+ const sorted=[...players].sort((a,b)=>b.score-a.score);const i=sorted.findIndex(p=>p.name===me);
+ document.getElementById("rank").textContent=i<0?"—":i+1;
+}
+function answer(i,btn){
+ if(answered)return;answered=true;
+ const q=questions[qIndex],correct=i===q.c,p=players.find(x=>x.name===me);
+ document.querySelectorAll(".answer").forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add("correct");if(j===i&&!correct)b.classList.add("wrong")});
+ if(correct){score+=1000;p.score=score;p.correct++;document.getElementById("feedback").innerHTML='<div class="feedback correct">Correct · +1,000 points</div>'}
+ else{p.score=score;document.getElementById("feedback").innerHTML='<div class="feedback wrong">Not quite · 0 points</div>'}
+ document.getElementById("score").textContent=score;updateRank();document.getElementById("progressText").textContent=(qIndex+1)+" of "+questions.length+" answered";
+ document.getElementById("progressBar").style.width=((qIndex+1)/questions.length*100)+"%";
+ setTimeout(()=>{if(qIndex<questions.length-1){qIndex++;answered=false;render()}else{finish()}},800);
+}
+function finish(){
+ const sorted=[...players].sort((a,b)=>b.score-a.score),i=sorted.findIndex(p=>p.name===me),mine=sorted[i];
+ document.getElementById("finalScore").textContent=mine.score;document.getElementById("finalRank").textContent=i+1;
+ document.getElementById("leaderboard").innerHTML=sorted.map((p,n)=>`<tr class="${p.name===me?'me':''}"><td>${n+1}</td><td><strong>${p.name}</strong>${p.name===me?'<span class="me-tag">you</span>':''}</td><td><strong>${p.score}</strong></td><td>${Math.round(p.correct/questions.length*100)}%</td></tr>`).join("");
+ show("finalView");
+}
+</script>
+</body>
+</html>

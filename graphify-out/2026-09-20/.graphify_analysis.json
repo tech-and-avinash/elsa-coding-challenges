@@ -1,0 +1,376 @@
+{
+  "communities": {
+    "0": [
+      "backend_cmd_server_main",
+      "backend_cmd_server_main_corsmiddleware",
+      "backend_cmd_server_main_main",
+      "backend_pkg_api_handlers",
+      "backend_pkg_api_handlers_healthhandler",
+      "backend_pkg_api_handlers_quizzeshandler",
+      "backend_pkg_api_handlers_sessionshandler",
+      "backend_pkg_db_db",
+      "backend_pkg_db_db_getallsessions",
+      "backend_pkg_db_db_getquizbyid",
+      "backend_pkg_db_db_initdb",
+      "backend_pkg_db_db_migrateschema",
+      "backend_pkg_db_db_savequiz",
+      "backend_pkg_db_db_seeddefaultdata",
+      "backend_pkg_models_models_go_models_sessionsummary",
+      "backend_pkg_ws_client",
+      "backend_pkg_ws_hub",
+      "go_pkg_database_sql",
+      "go_pkg_elsa_real_time_quiz_backend_pkg_api",
+      "go_pkg_elsa_real_time_quiz_backend_pkg_db",
+      "go_pkg_elsa_real_time_quiz_backend_pkg_models",
+      "go_pkg_elsa_real_time_quiz_backend_pkg_ws",
+      "go_pkg_encoding_json",
+      "go_pkg_fmt",
+      "go_pkg_github_com_gorilla_websocket",
+      "go_pkg_github_com_lib_pq",
+      "go_pkg_log",
+      "go_pkg_math_rand",
+      "go_pkg_net_http",
+      "go_pkg_os",
+      "go_pkg_strings",
+      "go_pkg_sync",
+      "go_pkg_time",
+      "go_type_database_sql_db",
+      "go_type_net_http_handlerfunc",
+      "go_type_net_http_request",
+      "go_type_net_http_responsewriter"
+    ],
+    "1": [
+      "package",
+      "package_dependencies",
+      "package_dependencies_express",
+      "package_dependencies_pinia",
+      "package_dependencies_socket_io",
+      "package_dependencies_socket_io_client",
+      "package_dependencies_vue",
+      "package_dependencies_vue_router",
+      "package_devdependencies",
+      "package_devdependencies_concurrently",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitejs_plugin_vue",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_dev_client",
+      "package_scripts_preview",
+      "package_scripts_server_node",
+      "package_type",
+      "package_version",
+      "ref_concurrently",
+      "ref_express",
+      "ref_http",
+      "ref_socket_io",
+      "ref_socket_io_client",
+      "ref_vite",
+      "ref_vitejs_plugin_vue",
+      "server",
+      "server_app",
+      "server_defaultquizzes",
+      "server_getquestiondistribution",
+      "server_httpserver",
+      "server_io",
+      "server_sessions",
+      "vite_config"
+    ],
+    "2": [
+      "backend_pkg_db_db_getallquizzes",
+      "backend_pkg_db_db_getsessionbycode",
+      "backend_pkg_db_db_savesession",
+      "backend_pkg_models_models",
+      "backend_pkg_models_models_go_models_quiz",
+      "backend_pkg_models_models_go_models_session",
+      "backend_pkg_ws_client_servews",
+      "backend_pkg_ws_hub_getdistribution",
+      "backend_pkg_ws_hub_newhub",
+      "go_type_encoding_json_rawmessage",
+      "go_type_github_com_gorilla_websocket_conn",
+      "go_type_sync_rwmutex",
+      "go_type_time_time",
+      "models_answerresultpayload",
+      "models_liveupdatepayload",
+      "models_participant",
+      "models_participantanswer",
+      "models_participantsupdatedpayload",
+      "models_question",
+      "models_questionchangedpayload",
+      "models_roomstatepayload",
+      "models_wsmessage",
+      "ws_client",
+      "ws_client_readpump",
+      "ws_client_writepump",
+      "ws_hub",
+      "ws_hub_broadcasttoroom",
+      "ws_hub_getorcreatesession",
+      "ws_hub_handleevent",
+      "ws_hub_run",
+      "ws_hub_sendtoclient",
+      "ws_incomingmessage"
+    ],
+    "3": [
+      "ref_pinia",
+      "ref_vue",
+      "src_app",
+      "src_assets_main",
+      "src_main",
+      "src_main_app",
+      "src_router_index",
+      "src_router_index_router",
+      "src_router_index_routes",
+      "src_stores_auth",
+      "src_stores_auth_useauthstore",
+      "src_views_host_hostlayout",
+      "src_views_host_hostlayout_authstore",
+      "src_views_host_hostlayout_createnewquiz",
+      "src_views_host_hostlayout_handlelogout",
+      "src_views_host_hostlayout_pagetitle",
+      "src_views_host_hostlayout_quizstore",
+      "src_views_host_hostlayout_route",
+      "src_views_host_hostlayout_router",
+      "src_views_host_hostloginview",
+      "src_views_host_hostloginview_authstore",
+      "src_views_host_hostloginview_email",
+      "src_views_host_hostloginview_errormessage",
+      "src_views_host_hostloginview_handlelogin",
+      "src_views_host_hostloginview_password",
+      "src_views_host_hostloginview_quickdemologin",
+      "src_views_host_hostloginview_router",
+      "src_views_host_hostreportsview",
+      "src_views_host_hostsettingsview",
+      "src_views_host_hostsettingsview_defaultscoring",
+      "src_views_host_hostsettingsview_savesettings",
+      "src_views_host_hostsettingsview_workspacename"
+    ],
+    "4": [
+      "ref_vue_router",
+      "src_stores_quiz",
+      "src_stores_quiz_usequizstore",
+      "src_views_host_hostdashboardview",
+      "src_views_host_hostdashboardview_handlecreatequiz",
+      "src_views_host_hostdashboardview_quizstore",
+      "src_views_host_hostdashboardview_router",
+      "src_views_host_hostquizeditorview",
+      "src_views_host_hostquizeditorview_addoption",
+      "src_views_host_hostquizeditorview_addquestion",
+      "src_views_host_hostquizeditorview_handlesave",
+      "src_views_host_hostquizeditorview_movequestion",
+      "src_views_host_hostquizeditorview_quiz",
+      "src_views_host_hostquizeditorview_quizstore",
+      "src_views_host_hostquizeditorview_removeoption",
+      "src_views_host_hostquizeditorview_removequestion",
+      "src_views_host_hostquizeditorview_route",
+      "src_views_host_hostquizeditorview_router",
+      "src_views_host_hostquizzesview",
+      "src_views_host_hostquizzesview_handlecreatequiz",
+      "src_views_host_hostquizzesview_launchsession",
+      "src_views_host_hostquizzesview_quizstore",
+      "src_views_host_hostquizzesview_router",
+      "src_views_host_hostquizzesview_sessionstore"
+    ],
+    "5": [
+      "src_services_socket",
+      "src_services_socket_getsocket",
+      "src_services_socket_wsclient",
+      "src_services_socket_wsclient_connect",
+      "src_services_socket_wsclient_constructor",
+      "src_services_socket_wsclient_emit",
+      "src_services_socket_wsclient_getwsurl",
+      "src_services_socket_wsclient_off",
+      "src_services_socket_wsclient_on",
+      "src_services_socket_wsclient_trigger",
+      "src_stores_livesession",
+      "src_stores_livesession_uselivesessionstore",
+      "src_views_host_hostsessionview",
+      "src_views_host_hostsessionview_averagescore",
+      "src_views_host_hostsessionview_copied",
+      "src_views_host_hostsessionview_copyjoinlink",
+      "src_views_host_hostsessionview_currentaccuracy",
+      "src_views_host_hostsessionview_getbarwidth",
+      "src_views_host_hostsessionview_islastquestion",
+      "src_views_host_hostsessionview_joinurl",
+      "src_views_host_hostsessionview_responsepercentage",
+      "src_views_host_hostsessionview_route",
+      "src_views_host_hostsessionview_sessionstore"
+    ],
+    "6": [
+      "src_views_participant_participantapp",
+      "src_views_participant_participantapp_currentstage",
+      "src_views_participant_participantapp_displayname",
+      "src_views_participant_participantapp_getoptionclass",
+      "src_views_participant_participantapp_handleanswer",
+      "src_views_participant_participantapp_handlejoin",
+      "src_views_participant_participantapp_inputcode",
+      "src_views_participant_participantapp_inputname",
+      "src_views_participant_participantapp_isselectedcorrect",
+      "src_views_participant_participantapp_progresspercent",
+      "src_views_participant_participantapp_route",
+      "src_views_participant_participantapp_sessionstore",
+      "src_views_participant_participantapp_starttimer",
+      "src_views_participant_participantapp_timercount"
+    ],
+    "7": [
+      "pkg_elsa_real_time_quiz_backend"
+    ]
+  },
+  "cohesion": {
+    "0": 0.08858858858858859,
+    "1": 0.057057057057057055,
+    "2": 0.10483870967741936,
+    "3": 0.08669354838709678,
+    "4": 0.10144927536231885,
+    "5": 0.11857707509881422,
+    "6": 0.14285714285714285,
+    "7": 1.0
+  },
+  "gods": [
+    {
+      "id": "ws_hub",
+      "label": "Hub",
+      "degree": 11
+    },
+    {
+      "id": "ref_vue",
+      "label": "vue",
+      "degree": 11
+    },
+    {
+      "id": "backend_pkg_models_models_go_models_session",
+      "label": "Session",
+      "degree": 10
+    },
+    {
+      "id": "src_services_socket_wsclient",
+      "label": "WsClient",
+      "degree": 9
+    },
+    {
+      "id": "ref_vue_router",
+      "label": "vue-router",
+      "degree": 9
+    },
+    {
+      "id": "backend_pkg_ws_client_servews",
+      "label": "ServeWS()",
+      "degree": 7
+    },
+    {
+      "id": "ws_client",
+      "label": "Client",
+      "degree": 7
+    },
+    {
+      "id": "backend_pkg_api_handlers_quizzeshandler",
+      "label": "QuizzesHandler()",
+      "degree": 6
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 6
+    },
+    {
+      "id": "backend_cmd_server_main_main",
+      "label": "main()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "main()",
+      "target": "ServeWS()",
+      "source_files": [
+        "backend/cmd/server/main.go",
+        "backend/pkg/ws/client.go"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "main()",
+      "target": "NewHub()",
+      "source_files": [
+        "backend/cmd/server/main.go",
+        "backend/pkg/ws/hub.go"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "QuizzesHandler()",
+      "target": "GetAllQuizzes()",
+      "source_files": [
+        "backend/pkg/api/handlers.go",
+        "backend/pkg/db/db.go"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "GetQuizByID()",
+      "target": "Quiz",
+      "source_files": [
+        "backend/pkg/db/db.go",
+        "backend/pkg/models/models.go"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "SaveQuiz()",
+      "target": "Quiz",
+      "source_files": [
+        "backend/pkg/db/db.go",
+        "backend/pkg/models/models.go"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `vue` connect `index.js` to `package.json`, `HostQuizEditorView.vue`, `HostSessionView.vue`, `ParticipantApp.vue`?",
+      "why": "High betweenness centrality (0.126) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `vue-router` connect `HostQuizEditorView.vue` to `package.json`, `index.js`, `HostSessionView.vue`, `ParticipantApp.vue`?",
+      "why": "High betweenness centrality (0.103) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `express`, `pinia`, `socket.io` to the rest of the system?",
+      "why": "69 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `db.go` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.08858858858858859 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `package.json` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.057057057057057055 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `models.go` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10483870967741936 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `index.js` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.08669354838709678 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1789916294.0902946,
+    "seen": 1789916423.3750265,
+    "ast_hash": "b9d37e7eae412bd5681c101230d30726",
+    "semantic_hash": "b9d37e7eae412bd5681c101230d30726"
+  },
+  "backend/cmd/server/main.go": {
+    "mtime": 1789915681.2204032,
+    "seen": 1789916423.3750265,
+    "ast_hash": "db1cf89e88966fb954aafe025533cc6f",
+    "semantic_hash": "db1cf89e88966fb954aafe025533cc6f"
+  },
+  "backend/go.mod": {
+    "mtime": 1789904934.9745576,
+    "seen": 1789916423.3750265,
+    "ast_hash": "151b7585c8e60dcd0253b37ac1102591",
+    "semantic_hash": "151b7585c8e60dcd0253b37ac1102591"
+  },
+  "backend/pkg/api/handlers.go": {
+    "mtime": 1789927582.3250172,
+    "seen": 1789931165.9789183,
+    "ast_hash": "0a62ba6c3f5d384e165f6815d87ef564",
+    "semantic_hash": ""
+  },
+  "backend/pkg/db/db.go": {
+    "mtime": 1789927582.3268008,
+    "seen": 1789931165.9789183,
+    "ast_hash": "aeee723e07956d6378c4870b68bedcf6",
+    "semantic_hash": ""
+  },
+  "backend/pkg/models/models.go": {
+    "mtime": 1789927582.3278348,
+    "seen": 1789931165.9789183,
+    "ast_hash": "15f9214b0b09d53995d8662077a593da",
+    "semantic_hash": "15f9214b0b09d53995d8662077a593da"
+  },
+  "backend/pkg/ws/client.go": {
+    "mtime": 1789906260.0832276,
+    "seen": 1789916423.3750265,
+    "ast_hash": "5e3afeb63818ac16470ec90e1e9abe33",
+    "semantic_hash": "5e3afeb63818ac16470ec90e1e9abe33"
+  },
+  "backend/pkg/ws/hub.go": {
+    "mtime": 1789927582.3283544,
+    "seen": 1789931165.9789183,
+    "ast_hash": "3ae9b17eac1ad249e111380a98ace48d",
+    "semantic_hash": "3ae9b17eac1ad249e111380a98ace48d"
+  },
+  "package.json": {
+    "mtime": 1789905825.1043904,
+    "seen": 1789916423.3750265,
+    "ast_hash": "ed3d36b677bd799ee0b32538b935c9ea",
+    "semantic_hash": "ed3d36b677bd799ee0b32538b935c9ea"
+  },
+  "server.js": {
+    "mtime": 1789927582.3324156,
+    "seen": 1789931165.9789183,
+    "ast_hash": "9328ffd974f9a622f9177a8b456dbcdb",
+    "semantic_hash": "9328ffd974f9a622f9177a8b456dbcdb"
+  },
+  "src/App.vue": {
+    "mtime": 1789903835.317709,
+    "seen": 1789916423.3750265,
+    "ast_hash": "031b482a1708af71471cf572584cc71a",
+    "semantic_hash": "031b482a1708af71471cf572584cc71a"
+  },
+  "src/main.js": {
+    "mtime": 1789903827.156066,
+    "seen": 1789916423.3750265,
+    "ast_hash": "3eb57270d39c8cc9f17988b773fb36c8",
+    "semantic_hash": "3eb57270d39c8cc9f17988b773fb36c8"
+  },
+  "src/router/index.js": {
+    "mtime": 1789927582.3373916,
+    "seen": 1789931165.9789183,
+    "ast_hash": "2e9f4122c00dec6f12afeac870184a00",
+    "semantic_hash": "2e9f4122c00dec6f12afeac870184a00"
+  },
+  "src/services/socket.js": {
+    "mtime": 1789927582.3399632,
+    "seen": 1789931165.9789183,
+    "ast_hash": "98d3d477240281cf71a5f476713111f2",
+    "semantic_hash": "98d3d477240281cf71a5f476713111f2"
+  },
+  "src/stores/auth.js": {
+    "mtime": 1789903800.1878886,
+    "seen": 1789916423.3750265,
+    "ast_hash": "bf2e014cbc556a196693d6e113ae9f77",
+    "semantic_hash": "bf2e014cbc556a196693d6e113ae9f77"
+  },
+  "src/stores/liveSession.js": {
+    "mtime": 1789927582.3465147,
+    "seen": 1789931165.9789183,
+    "ast_hash": "716858a53d81b5eeed34f480ce97d60f",
+    "semantic_hash": ""
+  },
+  "src/stores/quiz.js": {
+    "mtime": 1789930064.3519628,
+    "seen": 1789931165.9789183,
+    "ast_hash": "d29f5b2085dea192b17fd8193614c528",
+    "semantic_hash": ""
+  },
+  "src/views/host/HostDashboardView.vue": {
+    "mtime": 1789930064.31292,
+    "seen": 1789931165.9789183,
+    "ast_hash": "fc142dceac3bcfe1dd6b62aa03c9e0cb",
+    "semantic_hash": ""
+  },
+  "src/views/host/HostLayout.vue": {
+    "mtime": 1789930064.3109176,
+    "seen": 1789931165.9789183,
+    "ast_hash": "4d92b95ac8484b1f4ab2c4ee694607b5",
+    "semantic_hash": ""
+  },
+  "src/views/host/HostLoginView.vue": {
+    "mtime": 1789903850.6813161,
+    "seen": 1789916423.3750265,
+    "ast_hash": "98138dbb5ac813bbc256a71aefb676fd",
+    "semantic_hash": "98138dbb5ac813bbc256a71aefb676fd"
+  },
+  "src/views/host/HostQuizEditorView.vue": {
+    "mtime": 1789927582.3609731,
+    "seen": 1789931165.9789183,
+    "ast_hash": "e2451f9fdc76c75c01c5c8cc1e2a85f8",
+    "semantic_hash": "e2451f9fdc76c75c01c5c8cc1e2a85f8"
+  },
+  "src/views/host/HostQuizzesView.vue": {
+    "mtime": 1789927582.365646,
+    "seen": 1789931165.9789183,
+    "ast_hash": "0d3dc4ddb11741660c9ab7ac7c612eb8",
+    "semantic_hash": ""
+  },
+  "src/views/host/HostReportsView.vue": {
+    "mtime": 1789930064.3109176,
+    "seen": 1789931165.9789183,
+    "ast_hash": "411ad45ab536d968f0bcb279c3a31007",
+    "semantic_hash": ""
+  },
+  "src/views/host/HostSessionView.vue": {
+    "mtime": 1789930064.3412597,
+    "seen": 1789931165.9789183,
+    "ast_hash": "87bfd6dbdc28078b1e8f4a2087ea9c81",
+    "semantic_hash": ""
+  },
+  "src/views/host/HostSettingsView.vue": {
+    "mtime": 1789903900.8835115,
+    "seen": 1789916423.3750265,
+    "ast_hash": "1507c0d5e1c59b0d20c51197e403d054",
+    "semantic_hash": "1507c0d5e1c59b0d20c51197e403d054"
+  },
+  "src/views/participant/ParticipantApp.vue": {
+    "mtime": 1789927582.3927505,
+    "seen": 1789931165.9789183,
+    "ast_hash": "a57b86b21f8ee921f456c446a8ed10eb",
+    "semantic_hash": "a57b86b21f8ee921f456c446a8ed10eb"
+  },
+  "vite.config.js": {
+    "mtime": 1789930253.5979483,
+    "seen": 1789931165.9800897,
+    "ast_hash": "ebfdd83aa58fbbe3797a12fc3312777f",
+    "semantic_hash": ""
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1789916319.4729872,
+    "seen": 1789918533.6351435,
+    "ast_hash": "a0e4d192b9e2e17256124dbfc8e24e6a",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1789916319.4749913,
+    "seen": 1789918533.6351435,
+    "ast_hash": "a831cf3669f1e6ab85d8a80ebe655f99",
+    "semantic_hash": ""
+  },
+  ".ai/implementation_plan.md": {
+    "mtime": 1789904911.96766,
+    "seen": 1789918533.6351435,
+    "ast_hash": "f8484295d81e1443e7a63f5b2f2cd942",
+    "semantic_hash": ""
+  },
+  ".ai/walkthrough.md": {
+    "mtime": 1789906559.118506,
+    "seen": 1789918533.6351435,
+    "ast_hash": "d5be900d28bf945ec9b5e4cd6e3b816f",
+    "semantic_hash": ""
+  },
+  ".github/copilot-instructions.md": {
+    "mtime": 1789916271.5164232,
+    "seen": 1789918533.6351435,
+    "ast_hash": "2b23503628bf2ec71d067a85ca8948ab",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1789916294.0715172,
+    "seen": 1789918533.6351435,
+    "ast_hash": "8a6643a420fdad6bfb583523bc6cef16",
+    "semantic_hash": ""
+  },
+  "compose.yaml": {
+    "mtime": 1789930253.5979483,
+    "seen": 1789931165.9800897,
+    "ast_hash": "a8473074f0d936ab0ac0d400ad48ef7a",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1789903768.6342056,
+    "seen": 1789918533.6351435,
+    "ast_hash": "9f83be5be7ce3034c2dc372f00b2b57c",
+    "semantic_hash": ""
+  },
+  ".ai/elsa_live_quiz_admin_host_final.html": {
+    "mtime": 1789903264.0416205,
+    "seen": 1789931165.9800897,
+    "ast_hash": "c3b8bdd28bdb2a4fed1868f4d1e9c19b",
+    "semantic_hash": ""
+  },
+  ".ai/elsa_participant_view.html": {
+    "mtime": 1789903314.2534497,
+    "seen": 1789931165.9800897,
+    "ast_hash": "04525d0e569a8a1e488a538c08ba22f1",
+    "semantic_hash": ""
+  },
+  "AI_COLLABORATION.md": {
+    "mtime": 1789930403.0486236,
+    "seen": 1789931165.9800897,
+    "ast_hash": "f211baa217a7412b36972c8fb018f80f",
+    "semantic_hash": ""
+  },
+  "real_time_vocabulary_quiz_sdd.md": {
+    "mtime": 1789929942.1377678,
+    "seen": 1789931165.9800897,
+    "ast_hash": "0b42264becd1ccc62567ad439b834dc6",
+    "semantic_hash": ""
+  }
+}
